@@ -47,8 +47,13 @@ async def show_list(message: types.Message) -> None:
 
 @dp.message_handler()
 async def message_reader(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
-                                                 "Для справки введите команду: /help")
+    if message.text == "Цены Активов":
+        await bot.send_message(message.from_user.id, "", reply_markup=nav.StocksMenu)
+    elif message.text == "Узнать Погоду":
+        await bot.send_message(message.from_user.id, collect_weather_data())
+    else:
+        await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
+                                                     "Для справки введите команду: /help")
 
 
 if __name__ == "__main__":
