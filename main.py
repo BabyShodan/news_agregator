@@ -50,7 +50,7 @@ async def message_reader(message: types.Message) -> None:
     if message.text == "Цены активов":
         await bot.send_message(message.from_user.id, "", reply_markup=nav.StocksMenu)
     elif message.text == "Узнать погоду":
-        await bot.send_message(message.from_user.id, collect_weather_data())
+        await bot.send_message(message.from_user.id, f"{collect_weather_data()}")
     else:
         await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
                                                      "Для справки введите команду: /help")
