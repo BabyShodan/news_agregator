@@ -35,13 +35,20 @@ async def on_shutdown(dispatcher):
 
 
 @dp.message_handler(commands=["start"])
-async def show_list() -> None:
-    pass
+async def show_list(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, "Привет! \n Я бот-агрегатор новостей! 🤖 \n"
+                           "Пожалуйста, введи команду /help чтобы узнать мои возможности")
 
 
 @dp.message_handler(commands=["help"])
-async def help_show() -> None:
-    pass
+async def help_show(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id,
+                           """
+                           Список доступных команд на данный момент:
+                           /help - ты сейчас ввёл/ввела данную команду,
+                           /start - начало диалога со мной,
+                           /stocks - узнать стоимость различных активов
+                           """)
 
 
 @dp.message_handler(commands=["stocks"])
@@ -52,7 +59,7 @@ async def exchange_options(message: types.Message) -> None:
 @dp.message_handler()
 async def message_reader(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
-                                                 "Для справки введите команду: help")
+                                                 "Для справки введите команду: /help")
 
 
 if __name__ == "__main__":
