@@ -36,24 +36,29 @@ async def on_shutdown(dispatcher):
 
 @dp.message_handler(commands=["start"])
 async def show_list(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Привет! \n Я бот-агрегатор новостей! 🤖 \n"
+    await bot.send_message(message.from_user.id, "Привет! \nЯ бот-агрегатор новостей! 🤖 \n"
                            "Пожалуйста, введи команду /help чтобы узнать мои возможности")
 
 
 @dp.message_handler(commands=["help"])
 async def help_show(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id,
-                           """
-                           Список доступных команд на данный момент:
-                           /help - ты сейчас ввёл/ввела данную команду,
-                           /start - начало диалога со мной,
-                           /stocks - узнать стоимость различных активов
-                           """)
+    await bot.send_message(message.from_user.id, """
+    Список доступных команд на данный момент:
+    /help - ты сейчас ввёл/ввела данную команду,
+    /start - начало диалога со мной,
+    /stocks - узнать стоимость различных активов,
+    /weather - узнать погоду
+    """)
 
 
 @dp.message_handler(commands=["stocks"])
 async def exchange_options(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, str(collect_stocks_data(STOCKS_API_KEY, "AAPL")))
+
+
+@dp.message_handler(commands=["weather"])
+async def weather_options(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, "Погода хорошая 🌞")
 
 
 @dp.message_handler()
