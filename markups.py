@@ -3,12 +3,12 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 btnMain = KeyboardButton("На главную")
 
 # -----Main Menu-----
-btnStocks = KeyboardButton("Цены Активов")
+btnStocks = KeyboardButton("Цены aктивов")
 btnWeather = KeyboardButton("Узнать погоду")
 MainMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnStocks, btnWeather)
 
 # -----Stocks Menu-----
-btnCompany = KeyboardButton("Акции Компаний")
+btnCompany = KeyboardButton("Акции компаний")
 btnMoney = KeyboardButton("Традиционные валюты")
 btnCrypto = KeyboardButton("Криптовалюты")
 StocksMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnCompany,
