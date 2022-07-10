@@ -5,7 +5,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
 from aiogram import Bot, types
 
-from api import *
+from api import collect_stocks_data, collect_weather_data
 
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -37,18 +37,19 @@ async def on_shutdown(dispatcher):
 
 @dp.message_handler(commands=["start"])
 async def show_list(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Привет! \nЯ бот-агрегатор новостей! 🤖 \n"
-                           "Пожалуйста, введи команду /help чтобы узнать мои возможности")
+    await bot.send_message(message.from_user.id, f"Привет {message.from_user.first_name}!\n"
+                                                 "Я бот-агрегатор новостей! 🤖 \n"
+                                                 "Пожалуйста, введи команду /help чтобы узнать мои возможности")
 
 
 @dp.message_handler(commands=["help"])
 async def help_show(message: types.Message) -> None:
     await bot.send_message(message.from_user.id,
-                           "Список доступных команд на данный момент:"
-                           "/help - ты сейчас ввёл/ввела данную команду,"
-                           "/start - начало диалога со мной,"
-                           "/stocks - узнать стоимость различных активов,"
-                           "/weather - узнать погоду")
+                           "Список доступных команд на данный момент:\n"
+                           "/help - ты сейчас ввёл/ввела данную команду,\n"
+                           "/start - начало диалога со мной,\n"
+                           "/stocks - узнать стоимость различных активов,\n"
+                           "/weather - узнать погоду\n")
 
 
 @dp.message_handler(commands=["stocks"])
