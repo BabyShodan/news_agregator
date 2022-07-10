@@ -6,6 +6,7 @@ from aiogram.utils.executor import start_webhook
 from aiogram import Bot, types
 
 from api import collect_stocks_data, collect_weather_data
+import markups as nav
 
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -37,29 +38,11 @@ async def on_shutdown(dispatcher):
 
 @dp.message_handler(commands=["start"])
 async def show_list(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, f"Привет {message.from_user.first_name}!\n"
-                                                 "Я бот-агрегатор новостей! 🤖 \n"
-                                                 "Пожалуйста, введи команду /help чтобы узнать мои возможности")
-
-
-@dp.message_handler(commands=["help"])
-async def help_show(message: types.Message) -> None:
     await bot.send_message(message.from_user.id,
-                           "Список доступных команд на данный момент:\n"
-                           "/help - ты сейчас ввёл/ввела данную команду,\n"
-                           "/start - начало диалога со мной,\n"
-                           "/stocks - узнать стоимость различных активов,\n"
-                           "/weather - узнать погоду\n")
-
-
-@dp.message_handler(commands=["stocks"])
-async def exchange_options(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Активы нормальные")
-
-
-@dp.message_handler(commands=["weather"])
-async def weather_options(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Погода хорошая 🌞")
+                           f"Привет {message.from_user.first_name}!\n"
+                           "Я бот-агрегатор новостей! 🤖 \n"
+                           "Пожалуйста, введи команду /help чтобы узнать мои возможности",
+                           reply_markup=nav.MainMenu)
 
 
 @dp.message_handler()
