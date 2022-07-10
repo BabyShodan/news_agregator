@@ -10,6 +10,7 @@ from api import *
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
 STOCKS_API_KEY = os.getenv("STOCKS_API")
+WEATHER_API_KEY = os.getenv("WEATHER_API")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
@@ -42,18 +43,17 @@ async def show_list(message: types.Message) -> None:
 
 @dp.message_handler(commands=["help"])
 async def help_show(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, """
-    Список доступных команд на данный момент:
-    /help - ты сейчас ввёл/ввела данную команду,
-    /start - начало диалога со мной,
-    /stocks - узнать стоимость различных активов,
-    /weather - узнать погоду
-    """)
+    await bot.send_message(message.from_user.id,
+                           "Список доступных команд на данный момент:"
+                           "/help - ты сейчас ввёл/ввела данную команду,"
+                           "/start - начало диалога со мной,"
+                           "/stocks - узнать стоимость различных активов,"
+                           "/weather - узнать погоду")
 
 
 @dp.message_handler(commands=["stocks"])
 async def exchange_options(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, str(collect_stocks_data(STOCKS_API_KEY, "AAPL")))
+    await bot.send_message(message.from_user.id, "Активы нормальные")
 
 
 @dp.message_handler(commands=["weather"])
