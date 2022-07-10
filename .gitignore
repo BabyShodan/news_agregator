@@ -1,2 +1,5 @@
 environment.sh
+.idea
+.vscode
 venv
+
