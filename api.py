@@ -7,7 +7,7 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
         result = requests.get(f"https://api.twelvedata.com/time_series?symbol={ticker}:{exchange}"
                               f"&interval={interval}&apikey={token_stocks}").json()
     except RequestApiError as e:
-        print("Something went wrong: " + e)
+        print("Something went wrong: ", e)
         return "К сожалению я не могу найти данный актив. "
     message_text = "Мета информация:\n"
     for k, v in result["meta"].items():
