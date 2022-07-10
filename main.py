@@ -34,9 +34,25 @@ async def on_shutdown(dispatcher):
     await bot.delete_webhook()
 
 
+@dp.message_handler(commands=["start"])
+async def show_list() -> None:
+    pass
+
+
+@dp.message_handler(commands=["help"])
+async def help_show() -> None:
+    pass
+
+
+@dp.message_handler(commands=["stocks"])
+async def exchange_options(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, str(collect_stocks_data(STOCKS_API_KEY, "AAPL")))
+
+
 @dp.message_handler()
 async def message_reader(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁")
+    await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
+                                                 "Для справки введите команду: help")
 
 
 if __name__ == "__main__":
