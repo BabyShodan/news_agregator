@@ -48,9 +48,13 @@ async def show_list(message: types.Message) -> None:
 @dp.message_handler()
 async def message_reader(message: types.Message) -> None:
     if message.text == "Цены активов":
-        await bot.send_message(message.from_user.id, "", reply_markup=nav.StocksMenu)
+        await bot.send_message(message.from_user.id,
+                               text="Пожалуйста, выберите что-нибудь из списка: ",
+                               reply_markup=nav.StocksMenu)
     elif message.text == "Узнать погоду":
         await bot.send_message(message.from_user.id, text=collect_weather_data("token", "city"))
+    elif message.text == "Показать новости":
+        await bot.send_message(message.from_user.id, text="Нету ничего...")
     else:
         await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
                                                      "Для справки введите команду: /help")
