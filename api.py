@@ -34,7 +34,7 @@ def collect_weather_data(token_weather: str, city: str) -> str:
             for i in elements:
                 answer += i + "\n"
                 for k, v in result[i].items():
-                    answer += k + " : " + v + "\n"
+                    answer += str(k) + " : " + str(v) + "\n"
             return answer
         else:
             return "Мне не удалось получить данные о погоде"
