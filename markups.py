@@ -5,6 +5,7 @@ btnMain = KeyboardButton("На главную")
 # -----Main Menu-----
 btnStocks = KeyboardButton("Цены активов")
 btnWeather = KeyboardButton("Узнать погоду")
+btnNews = KeyboardButton("Показать новости")
 MainMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnStocks, btnWeather)
 
 # -----Stocks Menu-----

@@ -3,10 +3,7 @@ import os
 
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
-from aiogram import Bot, types
-
-from api import collect_stocks_data, collect_weather_data
-import markups as nav
+from aiogram import Bot
 
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -34,30 +31,6 @@ async def on_startup(dispatcher):
 
 async def on_shutdown(dispatcher):
     await bot.delete_webhook()
-
-
-@dp.message_handler(commands=["start"])
-async def show_list(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id,
-                           f"Привет {message.from_user.first_name}!\n"
-                           "Я бот-агрегатор новостей! 🤖 \n"
-                           "Пожалуйста, выбери функцию из меню",
-                           reply_markup=nav.MainMenu)
-
-
-@dp.message_handler()
-async def message_reader(message: types.Message) -> None:
-    if message.text == "Цены активов":
-        await bot.send_message(message.from_user.id,
-                               text="Пожалуйста, выберите что-нибудь из списка: ",
-                               reply_markup=nav.StocksMenu)
-    elif message.text == "Узнать погоду":
-        await bot.send_message(message.from_user.id, text=collect_weather_data("token", "city"))
-    elif message.text == "Показать новости":
-        await bot.send_message(message.from_user.id, text="Нету ничего...")
-    else:
-        await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n"
-                                                     "Для справки введите команду: /help")
 
 
 if __name__ == "__main__":
