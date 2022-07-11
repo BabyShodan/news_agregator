@@ -83,7 +83,7 @@ async def stocks_cos(message: types.Message) -> None:
                                reply_markup=nav.StocksMenu)
 
 
-@dp.message_handler(Text(equals=["AAPL", "AAT",
+@dp.message_handler(Text(equals=["AAPL", "MSFT", "TCS"
                                  "Рубли", "Тенге", "Доллары", "Евро",
                                  "BTC", "ETH", "Solana", "Near", "Ton", "USDT"]))
 async def company_stock(message: types.Message) -> None:

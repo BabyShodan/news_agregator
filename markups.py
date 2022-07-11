@@ -19,9 +19,11 @@ StocksMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnCompany,
 
 # -----Company Menu-----
 btnAAPL = KeyboardButton("AAPL")
-btnAAT = KeyboardButton("AAT")
+btnMSFT = KeyboardButton("MSFT")
+btnTCS = KeyboardButton("TCS")
 CompanyMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnAAPL,
-                                                            btnAAT,
+                                                            btnMSFT,
+                                                            btnTCS,
                                                             btnMain,)
 
 # -----Crypto Menu-----
@@ -44,15 +46,19 @@ btnRub = KeyboardButton("Рубли")
 btnKz = KeyboardButton("Тенге")
 btnUSD = KeyboardButton("Доллары")
 btnEUR = KeyboardButton("Евро")
+btnKRN = KeyboardButton("Крона")
 MoneyMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnRub,
                                                           btnKz,
                                                           btnUSD,
                                                           btnEUR,
+                                                          btnKRN,
                                                           btnMain,)
 
 # -----Company Menu-----
 btnKrasnodar = KeyboardButton("Krasnodar")
 btnMoscow = KeyboardButton("Moscow")
+btnPetersburg = KeyboardButton("Saint-Petersburg")
 CitiesMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnKrasnodar,
                                                            btnMoscow,
+                                                           btnPetersburg,
                                                            btnMain,)
