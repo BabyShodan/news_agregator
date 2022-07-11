@@ -1,13 +1,12 @@
 import requests
-from exceptions import ParseJsonError
 
 
 def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", interval="1min") -> str:
     result = requests.get(f"https://api.twelvedata.com/time_series?symbol={ticker}:{exchange}"
-                          f"&interval={interval}&apikey={token_stocks}").json()
-    print(result)
+                          f"&interval={interval}&apikey={token_stocks}")
     try:
         if result.status_code == 200:
+            result = result.json()
             message_text = "Мета информация:\n"
             for k, v in result["meta"].items():
                 message_text += k + " : " + v + "\n"
@@ -18,7 +17,7 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
         else:
             return "Мне не удалось заполучить данные об этом активе"
     except Exception as e:
-        print("Something went wrong: ", e)
+        print("!Something went wrong: ", e)
         return "Я не смог собрать полные данные"
 
 

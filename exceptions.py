@@ -1,2 +1,0 @@
-class ParseJsonError(Exception):
-    pass
