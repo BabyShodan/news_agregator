@@ -59,6 +59,8 @@ async def stocks_cos(message: types.Message) -> None:
         await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
     elif message.text == "Узнать погоду":
         await bot.send_message(message.from_user.id, "Выберите интересующий город.", reply_markup=nav.CitiesMenu)
+    elif message.text == "Случайная новость":
+        await bot.send_message(message.from_user.id, collect_random_news(NEWS_API_KEY))
 
 
 @dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
@@ -91,11 +93,6 @@ async def company_stock(message: types.Message) -> None:
 @dp.message_handler(Text(equals=["Moscow", "Krasnodar"]))
 async def weather_info(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, collect_weather_data(WEATHER_API_KEY, message.text))
-
-
-@dp.message_handler(Text(equals="Случайная новость"))
-async def news_info(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, collect_random_news(NEWS_API_KEY))
 
 
 @dp.message_handler()
