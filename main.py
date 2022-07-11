@@ -47,12 +47,24 @@ async def show_list(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals="На главную"))
 async def go_back(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.")
+    await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.", reply_markup=nav.MainMenu)
 
 
 @dp.message_handler(Text(equals="Цены активов"))
 async def stocks_cos(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
+
+
+@dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
+async def stocks_cos(message: types.Message) -> None:
+    if message.text == "":
+        bot.send_message(message.from_user.id, "1")
+    elif message.text == "":
+        bot.send_message(message.from_user.id, "2")
+    elif message.text == "":
+        bot.send_message(message.from_user.id, "3")
+    else:
+        bot.send_message(message.from_user.id, "Я не знаю такой валюты", nav.StocksMenu)
 
 
 @dp.message_handler()
