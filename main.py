@@ -7,6 +7,7 @@ from aiogram.utils.executor import start_webhook
 from aiogram import Bot, types
 
 import markups as nav
+from api import *
 
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -57,14 +58,29 @@ async def stocks_cos(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
 async def stocks_cos(message: types.Message) -> None:
-    if message.text == "d":
-        await bot.send_message(message.from_user.id, "1")
-    elif message.text == "f":
-        await bot.send_message(message.from_user.id, "2")
-    elif message.text == "h":
-        await bot.send_message(message.from_user.id, "3")
+    if message.text == "Акции компаний":
+        await bot.send_message(message.from_user.id,
+                               "Выберите интересующую вас акцию из списка",
+                               reply_markup=nav.CompanyMenu)
+    elif message.text == "Традиционные валюты":
+        await bot.send_message(message.from_user.id,
+                               "Выберите интересующую вас валюту из списка",
+                               reply_markup=nav.MoneyMenu)
+    elif message.text == "Криптовалюты":
+        await bot.send_message(message.from_user.id,
+                               "Выберите интересующую вас криптовалюту из списка",
+                               reply_markup=nav.CryptoMenu)
     else:
-        await bot.send_message(message.from_user.id, "Я не знаю такой валюты", reply_markup=nav.StocksMenu)
+        await bot.send_message(message.from_user.id,
+                               "Я не знаю такой валюты",
+                               reply_markup=nav.StocksMenu)
+
+
+@dp.message_handler(Text(equals=["AAPL", "AAT",
+                                 "Рубли", "Тенге", "Доллары", "Евро",
+                                 "BTC", "ETH", "Solana", "Near", "Ton", "USDT"]))
+async def company_stock(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, collect_stocks_data(STOCKS_API_KEY, message.text))
 
 
 @dp.message_handler()

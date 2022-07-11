@@ -20,3 +20,7 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
 
 def collect_weather_data(token_weather: str, city: str) -> str:
     return "В разработке ⚒️"
+
+
+def collect_random_news(token_news: str) ->str:
+    return "В разработке ⚒️"
