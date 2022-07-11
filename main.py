@@ -49,6 +49,7 @@ async def show_list(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals="На главную"))
 async def go_back(message: types.Message) -> None:
+    """Main menu action"""
     await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.", reply_markup=nav.MainMenu)
 
 
@@ -65,6 +66,7 @@ async def stocks_cos(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
 async def stocks_cos(message: types.Message) -> None:
+    """Stocks menu actions"""
     if message.text == "Акции компаний":
         await bot.send_message(message.from_user.id,
                                "Выберите интересующую вас акцию из списка",
@@ -83,15 +85,17 @@ async def stocks_cos(message: types.Message) -> None:
                                reply_markup=nav.StocksMenu)
 
 
-@dp.message_handler(Text(equals=["AAPL", "MSFT", "TCS"
+@dp.message_handler(Text(equals=["AAPL", "MSFT", "TCS",
                                  "Рубли", "Тенге", "Доллары", "Евро",
                                  "BTC", "ETH", "Solana", "Near", "Ton", "USDT"]))
 async def company_stock(message: types.Message) -> None:
+    """Takes stocks info"""
     await bot.send_message(message.from_user.id, collect_stocks_data(STOCKS_API_KEY, message.text))
 
 
-@dp.message_handler(Text(equals=["Moscow", "Krasnodar"]))
+@dp.message_handler(Text(equals=["Moscow", "Krasnodar", "Saint-Petersburg"]))
 async def weather_info(message: types.Message) -> None:
+    """Weather menu"""
     await bot.send_message(message.from_user.id, collect_weather_data(WEATHER_API_KEY, message.text))
 
 
