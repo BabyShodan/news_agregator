@@ -1,2 +1,2 @@
-class RequestApiError(Exception):
+class ParseJsonError(Exception):
     pass
