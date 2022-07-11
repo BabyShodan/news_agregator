@@ -32,7 +32,7 @@ def collect_random_news(token_news: str) -> str:
     try:
         if result.status_code == 200:
             data = result.json()["articles"][randint(0, 100)]
-            return "Заголовок: " + str(data["title"]) + \
+            return "Заголовок: " + str(data["title"]) + "\n" +\
                    "Автор: " + str(data["author"]) + "\n" + \
                    "Ссылка на новость: " + str(data["url"])
         else:
