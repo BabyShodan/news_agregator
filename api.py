@@ -1,4 +1,5 @@
 import requests
+from random import randint
 
 
 def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", interval="1min") -> str:
@@ -30,7 +31,10 @@ def collect_random_news(token_news: str) -> str:
                           f"2022-07-11&sortBy=popularity&apiKey={token_news}")
     try:
         if result.status_code == 200:
-            return str((result.json()[0]["url"]))
+            data = result.json()["articles"][randint(0, 100)]
+            return "Заголовок: " + str(data["title"]) + \
+                   "Автор: " + str(data["author"]) + "\n" + \
+                   "Ссылка на новость: " + str(data["url"])
         else:
             return "Новостей пока нет"
     except Exception as e:
