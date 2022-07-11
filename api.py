@@ -23,7 +23,21 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
 
 
 def collect_weather_data(token_weather: str, city: str) -> str:
-    return "В разработке ⚒️"
+    result = requests.get(f"https://api.weatherapi.com/v1/current.json?key={token_weather}&q={city}&aqi=no")
+    try:
+        if result.status_code == 200:
+            result = result.json()
+            result.pop("condition", "")
+            elements = ["location", "current"]
+            answer = "Локация: \n"
+            for data in elements:
+                for i in data:
+                    answer += i + "\n"
+        else:
+            return "Мне не удалось получить данные о погоде"
+    except Exception as e:
+        print("!Something went wrong: ", e)
+        return "Нет данных о текущей погоде"
 
 
 def collect_random_news(token_news: str) -> str:
@@ -31,10 +45,10 @@ def collect_random_news(token_news: str) -> str:
                           f"2022-07-11&sortBy=popularity&apiKey={token_news}")
     try:
         if result.status_code == 200:
-            data = result.json()["articles"][randint(0, 100)]
-            return "Заголовок: " + str(data["title"]) + "\n" +\
-                   "Автор: " + str(data["author"]) + "\n" + \
-                   "Ссылка на новость: " + str(data["url"])
+            result = result.json()["articles"][randint(0, 100)]
+            return "Заголовок: " + str(result["title"]) + "\n" +\
+                   "Автор: " + str(result["author"]) + "\n" + \
+                   "Ссылка на новость: " + str(result["url"])
         else:
             return "Новостей пока нет"
     except Exception as e:
