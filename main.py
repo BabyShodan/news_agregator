@@ -64,7 +64,7 @@ async def stocks_cos(message: types.Message) -> None:
     elif message.text == "h":
         await bot.send_message(message.from_user.id, "3")
     else:
-        await bot.send_message(message.from_user.id, "Я не знаю такой валюты", nav.StocksMenu)
+        await bot.send_message(message.from_user.id, "Я не знаю такой валюты", reply_markup=nav.StocksMenu)
 
 
 @dp.message_handler()
