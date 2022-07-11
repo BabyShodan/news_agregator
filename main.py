@@ -57,14 +57,14 @@ async def stocks_cos(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
 async def stocks_cos(message: types.Message) -> None:
-    if message.text == "":
-        bot.send_message(message.from_user.id, "1")
-    elif message.text == "":
-        bot.send_message(message.from_user.id, "2")
-    elif message.text == "":
-        bot.send_message(message.from_user.id, "3")
+    if message.text == "d":
+        await bot.send_message(message.from_user.id, "1")
+    elif message.text == "f":
+        await bot.send_message(message.from_user.id, "2")
+    elif message.text == "h":
+        await bot.send_message(message.from_user.id, "3")
     else:
-        bot.send_message(message.from_user.id, "Я не знаю такой валюты", nav.StocksMenu)
+        await bot.send_message(message.from_user.id, "Я не знаю такой валюты", nav.StocksMenu)
 
 
 @dp.message_handler()
