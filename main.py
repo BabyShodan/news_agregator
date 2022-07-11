@@ -3,7 +3,7 @@ import os
 
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils.executor import start_webhook
-from aiogram import Bot
+from aiogram import Bot, types
 
 
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -31,6 +31,14 @@ async def on_startup(dispatcher):
 
 async def on_shutdown(dispatcher):
     await bot.delete_webhook()
+
+
+@dp.message_handler(commands=["start"])
+async def show_list(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id,
+                           f"Привет {message.from_user.first_name}!\n"
+                           "Я бот-агрегатор новостей! 🤖 \n"
+                           "Пожалуйста, выбери функцию из меню",)
 
 
 if __name__ == "__main__":
