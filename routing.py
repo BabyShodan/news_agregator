@@ -23,9 +23,9 @@ async def message_reader(message: types.Message) -> None:
 
 @dp.message_handler(Text(equals="На главную"))
 async def go_back(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.", reply_markup=nav.MainMenu)
+    await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.")
 
 
 @dp.message_handler(Text(equals="Цены активов"))
 async def stocks_cos(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
+    await bot.send_message(message.from_user.id, "Какие активы вас интересуют?")
