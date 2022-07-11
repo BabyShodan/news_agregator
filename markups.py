@@ -6,7 +6,7 @@ btnMain = KeyboardButton("На главную")
 btnStocks = KeyboardButton("Цены активов")
 btnWeather = KeyboardButton("Узнать погоду")
 btnNews = KeyboardButton("Показать новости")
-MainMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnStocks, btnWeather)
+MainMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnStocks, btnWeather, btnNews)
 
 # -----Stocks Menu-----
 btnCompany = KeyboardButton("Акции компаний")
@@ -17,20 +17,12 @@ StocksMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnCompany,
                                                            btnCrypto,
                                                            btnMain,)
 
-# -----Exchange Menu-----
-btnExchange1 = KeyboardButton("NASDAQ")
-btnExchange2 = KeyboardButton("")
-btnExchange3 = KeyboardButton("")
-ExchangeMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnExchange1,
-                                                             btnExchange2,
-                                                             btnExchange3,
-                                                             btnMain,)
 
 # -----Stocks Menu Money-----
-btnRub = KeyboardButton("")
-btnKz = KeyboardButton("")
-btnUSD = KeyboardButton("")
-btnEUR = KeyboardButton("")
+btnRub = KeyboardButton("Рубли")
+btnKz = KeyboardButton("Тенге")
+btnUSD = KeyboardButton("Доллары")
+btnEUR = KeyboardButton("Евро")
 MoneyMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnRub,
                                                           btnKz,
                                                           btnUSD,
