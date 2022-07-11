@@ -26,4 +26,13 @@ def collect_weather_data(token_weather: str, city: str) -> str:
 
 
 def collect_random_news(token_news: str) -> str:
-    return "В разработке ⚒️"
+    result = requests.get(f"https://newsapi.org/v2/everything?q=Apple&from="
+                          f"2022-07-11&sortBy=popularity&apiKey={token_news}")
+    try:
+        if result.status_code == 200:
+            return str((result.json()))
+        else:
+            return "Новостей пока нет"
+    except Exception as e:
+        print("Something went wrong: ", e)
+        return "Мне не удалось получить новости"
