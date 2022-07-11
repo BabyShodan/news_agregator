@@ -1,10 +1,7 @@
-import os
-
 from aiogram import types
 from aiogram.dispatcher.filters import Text
 
 from main import dp, bot
-import markups as nav
 
 
 @dp.message_handler(commands=["start"])

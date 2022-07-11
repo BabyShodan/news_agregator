@@ -17,7 +17,6 @@ StocksMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnCompany,
                                                            btnCrypto,
                                                            btnMain,)
 
-
 # -----Stocks Menu Money-----
 btnRub = KeyboardButton("Рубли")
 btnKz = KeyboardButton("Тенге")
