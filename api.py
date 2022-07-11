@@ -10,7 +10,7 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
         print("Something went wrong: ", e)
         return "К сожалению я не могу найти данный актив. "
     print(result.status_code)
-    if result.status_code == "200":
+    if result.status_code == 200:
         result.json()
         message_text = "Мета информация:\n"
         for k, v in result["meta"].items():
