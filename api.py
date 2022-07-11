@@ -30,9 +30,9 @@ def collect_random_news(token_news: str) -> str:
                           f"2022-07-11&sortBy=popularity&apiKey={token_news}")
     try:
         if result.status_code == 200:
-            return str((result.json()))
+            return str((result.json()[0]["url"]))
         else:
             return "Новостей пока нет"
     except Exception as e:
-        print("Something went wrong: ", e)
+        print("!Something went wrong: ", e)
         return "Мне не удалось получить новости"
