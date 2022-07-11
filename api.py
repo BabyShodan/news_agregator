@@ -28,11 +28,14 @@ def collect_weather_data(token_weather: str, city: str) -> str:
         if result.status_code == 200:
             result = result.json()
             result.pop("condition", "")
+            # Доделать и оптимизировать
             elements = ["location", "current"]
-            answer = "Локация: \n"
-            for data in elements:
-                for i in data:
-                    answer += i + "\n"
+            answer = ""
+            for i in elements:
+                answer += i + "\n"
+                for k, v in result[i].items():
+                    answer += k + " : " + v + "\n"
+            return answer
         else:
             return "Мне не удалось получить данные о погоде"
     except Exception as e:
