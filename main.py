@@ -13,6 +13,7 @@ from api import *
 BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
 STOCKS_API_KEY = os.getenv("STOCKS_API")
 WEATHER_API_KEY = os.getenv("WEATHER_API")
+NEWS_API_KEY = os.getenv("NEWS_API")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
@@ -51,9 +52,13 @@ async def go_back(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.", reply_markup=nav.MainMenu)
 
 
-@dp.message_handler(Text(equals="Цены активов"))
+@dp.message_handler(Text(equals=["Цены активов", "Узнать погоду", "Случайная новость"]))
 async def stocks_cos(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
+    """Main menu actions"""
+    if message.text == "Цены активов":
+        await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
+    elif message.text == "Узнать погоду":
+        await bot.send_message(message.from_user.id, "Выберите интересующий город.", reply_markup=nav.CitiesMenu)
 
 
 @dp.message_handler(Text(equals=["Акции компаний", "Традиционные валюты", "Криптовалюты"]))
@@ -81,6 +86,16 @@ async def stocks_cos(message: types.Message) -> None:
                                  "BTC", "ETH", "Solana", "Near", "Ton", "USDT"]))
 async def company_stock(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, collect_stocks_data(STOCKS_API_KEY, message.text))
+
+
+@dp.message_handler(Text(equals="Узнать погоду"))
+async def weather_info(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, collect_weather_data(WEATHER_API_KEY, message.text))
+
+
+@dp.message_handler(Text(equals="Узнать погоду"))
+async def news_info(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, collect_random_news(NEWS_API_KEY))
 
 
 @dp.message_handler()

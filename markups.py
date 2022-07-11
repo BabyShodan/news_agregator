@@ -49,3 +49,10 @@ MoneyMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnRub,
                                                           btnUSD,
                                                           btnEUR,
                                                           btnMain,)
+
+# -----Company Menu-----
+btnKrasnodar = KeyboardButton("Krasnodar")
+btnMoscow = KeyboardButton("Moscow")
+CitiesMenu = ReplyKeyboardMarkup(resize_keyboard=True).add(btnKrasnodar,
+                                                           btnMoscow,
+                                                           btnMain,)
