@@ -17,7 +17,8 @@ def collect_stocks_data(token_stocks: str, ticker: str, exchange="NASDAQ", inter
             return message_text
         else:
             return "Мне не удалось заполучить данные об этом активе"
-    except ParseJsonError as e:
+    except Exception as e:
+        print("Something went wrong: ", e)
         return "Я не смог собрать полные данные"
 
 
