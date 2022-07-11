@@ -45,11 +45,6 @@ async def show_list(message: types.Message) -> None:
                            reply_markup=nav.MainMenu)
 
 
-@dp.message_handler()
-async def message_reader(message: types.Message) -> None:
-    await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n")
-
-
 @dp.message_handler(Text(equals="На главную"))
 async def go_back(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, "Вы перемещены в главное меню.")
@@ -58,6 +53,11 @@ async def go_back(message: types.Message) -> None:
 @dp.message_handler(Text(equals="Цены активов"))
 async def stocks_cos(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, "Какие активы вас интересуют?", reply_markup=nav.StocksMenu)
+
+
+@dp.message_handler()
+async def message_reader(message: types.Message) -> None:
+    await bot.send_message(message.from_user.id, "К сожалению я не знаю данной команды 🙁 \n")
 
 
 print(__name__)
