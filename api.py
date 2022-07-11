@@ -27,7 +27,7 @@ def collect_weather_data(token_weather: str, city: str) -> str:
     try:
         if result.status_code == 200:
             result = result.json()
-            result.pop("condition")
+            result["current"].pop("condition")
             # Доделать и оптимизировать
             elements = ["location", "current"]
             answer = ""
