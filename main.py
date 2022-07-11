@@ -88,12 +88,12 @@ async def company_stock(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, collect_stocks_data(STOCKS_API_KEY, message.text))
 
 
-@dp.message_handler(Text(equals="Узнать погоду"))
+@dp.message_handler(Text(equals=["Moscow", "Krasnodar"]))
 async def weather_info(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, collect_weather_data(WEATHER_API_KEY, message.text))
 
 
-@dp.message_handler(Text(equals="Узнать погоду"))
+@dp.message_handler(Text(equals="Случайная новость"))
 async def news_info(message: types.Message) -> None:
     await bot.send_message(message.from_user.id, collect_random_news(NEWS_API_KEY))
 
