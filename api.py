@@ -32,7 +32,7 @@ def collect_weather_data(token_weather: str, city: str) -> str:
             elements = ["location", "current"]
             answer = ""
             for i in elements:
-                answer += i + "\n"
+                answer += i + "\n" + "\n"
                 for k, v in result[i].items():
                     answer += str(k) + " : " + str(v) + "\n"
             return answer
